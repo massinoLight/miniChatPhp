@@ -16,12 +16,13 @@
 <?php
 include 'fonction.php';
 $user=sessionUtilisateur();
+echo '<h1><center>Vos Contactes</center></h1>';
 echo '<div class="container">
   <div class="row mt-5">
     <div class="col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">';
 
 $labdd=connectBdd();
-$donnees= $labdd->prepare('SELECT nom FROM `utilisateur`WHERE 1');
+$donnees= $labdd->prepare('SELECT nom FROM `utilisateur` ORDER BY(nom)');
 
     $donnees->execute();
     while ($reponse = $donnees->fetch())
@@ -40,8 +41,8 @@ if($reponse['nom']!=$user){
                <div class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
                  <h4 class="m-0"><a href="#">';
 
-                 echo '<a href=discussion.php?utilisateur=massino&correspandant='.$reponse['nom'].'>';
-                 echo $reponse['nom'];
+                 echo '<strong><a href=discussion.php?utilisateur=massino&correspandant='.$reponse['nom'].'></strong>';
+                 echo '<b>'.$reponse['nom'].'</b>';
                  echo '</a>';
 
              echo'	</div>
@@ -58,8 +59,8 @@ if($reponse['nom']!=$user){
                </div>
                <div class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
                  <h4 class="m-0"><a href="#">';
-                  echo '<a href=discussion.php?utilisateur=massino&correspandant='.$reponse['nom'].'>';
-                 echo $reponse['nom'];
+                  echo '<b><a href=discussion.php?utilisateur=massino&correspandant='.$reponse['nom'].'></b>';
+                 echo '<b>'.$reponse['nom'].'</b>';
                  echo '</a>';
 
 
