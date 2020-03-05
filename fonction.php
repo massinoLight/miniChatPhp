@@ -63,6 +63,8 @@ function sessionUtilisateur(){
   }
   else if($_SESSION['username'] !== ""){
       $user = $_SESSION['username'];
+      
+
       // afficher un message
       echo "<h1>Bonjour $user</h1>";
       return $user;

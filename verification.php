@@ -9,15 +9,15 @@ if(isset($_POST['username']) && isset($_POST['password']))
     $db_host     = 'localhost';
     $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
            or die('erreur lors de la connexion a la base de données');
-    
+
     // on applique les deux fonctions mysqli_real_escape_string et htmlspecialchars
     // pour éliminer toute attaque de type injection SQL et XSS
-    $username = mysqli_real_escape_string($db,htmlspecialchars($_POST['username'])); 
+    $username = mysqli_real_escape_string($db,htmlspecialchars($_POST['username']));
     $password = mysqli_real_escape_string($db,htmlspecialchars($_POST['password']));
-    
+
     if($username !== "" && $password !== "")
     {
-        $requete = "SELECT count(*) FROM utilisateur where 
+        $requete = "SELECT count(*) FROM utilisateur where
               nom = '".$username."' and mdp = '".$password."' ";
         $exec_requete = mysqli_query($db,$requete);
         $reponse      = mysqli_fetch_array($exec_requete);
@@ -25,7 +25,7 @@ if(isset($_POST['username']) && isset($_POST['password']))
         if($count!=0) // nom d'utilisateur et mot de passe correctes
         {
            $_SESSION['username'] = $username;
-           header('Location: messagerie.php');
+           header('Location: contactes.php');
         }
         else
         {

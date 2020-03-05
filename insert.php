@@ -1,4 +1,4 @@
- <?php
+<?php
 
 
 // connexion à la base de données
@@ -6,9 +6,9 @@
     $db_password = '';
     $db_name     = 'visiteurs';
     $db_host     = 'localhost';
-    
-     
-    
+
+
+
 $con=mysqli_connect($db_host, $db_username, $db_password,$db_name);
 
 // Check connection
@@ -27,17 +27,17 @@ if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
-else 
+else
 {
 
 echo '<script type="text/javascript">';
 echo ' alert("Bienvenue parmis nous")';  //not showing an alert box.
 echo '</script>';
-header('Location: login.php');        
+header('Location: login.php');
 }
 
 }
-else 
+else
 {
 echo "<p style='color:red'>verifier lemot de passe introduit </p>";
 }

@@ -1,39 +1,35 @@
    <?php
-// connexion à la base de données
-    $db_username = 'root';
-    $db_password = '';
-    $db_name     = 'visiteurs';
-    $db_host     = 'localhost';
-    
-     
-    
-$con=mysqli_connect($db_host, $db_username, $db_password,$db_name);
 
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Erreur lors de la connexion a la base de données : " . mysqli_connect_error();
-  }
-else
-{
+   include 'fonction.php';
+session_start();
+    $user=$_SESSION['utilisateur'];
+    $talker=$_SESSION['correspandant'];
+    $labdd=connectBdd();
+    $idu1=getUserId($user);
+    $idu2=getUserId($talker);
+
+
+
+
 if( $_POST[message] !="")
 {
-$sql="INSERT INTO `message`(`utilisateur1`, `utilisateur2`, `contenu`, `dateenvoi`) VALUES (1,21,'$_POST[message]', NOW() )";
-//$sql="INSERT INTO `message`(`id1`, `id2`, `contenu`, `dateenvoi`) VALUES (1,21,'hey you',NOW())";
+
+//$sql="INSERT INTO `message`(`utilisateur1`, `utilisateur2`, `contenu`, `dateenvoi`) VALUES (1,21,'$_POST[message]', NOW() )";
+$donnees= $labdd->prepare('INSERT INTO `message`(`utilisateur1`, `utilisateur2`, `contenu`, `dateenvoi`) VALUES (?,?,?, NOW() )');
+    $donnees->bindParam(1, $idu1, PDO::PARAM_INT);
+    $donnees->bindParam(2, $idu2, PDO::PARAM_INT);
+    $donnees->bindParam(3, $_POST[message], PDO::PARAM_STR, 255);
+    $donnees->execute();
 
 
-if (!mysqli_query($con,$sql))
-  {
-  die('Error: ' . mysqli_error($con));
-  }
+
 }
-else 
+else
 {
 echo "<p style='color:red'>probléme lors de l'envoi </p>";
 }
-}
-mysqli_close($con);
-header('Location: discussion.php');
+
+header('Location: discussion.php?correspandant='.$talker);
 
 
 ?>
