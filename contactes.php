@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style2.css">
   </head>
   <body>
-    <a href='principale.php?deconnexion=true'><span>Déconnexion</span></a>
+    <a href='contactes.php?deconnexion=true'><span>Déconnexion</span></a>
 
 
 
